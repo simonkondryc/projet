@@ -1,0 +1,22 @@
+front:
+  hosts:
+    ${front}:
+      ansible_user: debian
+      ansible_become: True
+backends:
+  hosts:
+%{for node in backends_sbg ~}
+    ${node}:
+      ansible_user: debian
+      ansible_become: True
+%{endfor ~}
+%{for node in backends_gra ~}
+    ${node}:
+      ansible_user: debian
+      ansible_become: True
+%{endfor ~}
+  vars:
+    db_name: ${db_name}
+    db_hostname: ${db_hostname}
+    db_username: ${db_username}
+    db_password: ${db_password}
